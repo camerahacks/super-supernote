@@ -27,7 +27,7 @@ Here are the steps for a fresh install.
 
 Docker requires ```root``` priviledges for pretty much all its commands. So, this is a good time to login as root. If you are logged in as another user use ```sudo su``` to become root.
 
-```bash
+```
 # Add Docker's official GPG key:
 apt update
 apt install ca-certificates curl
@@ -49,19 +49,19 @@ apt update
 
 Install the latest version
 
-```bash
+```
 apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 Make sure it is running
 
-```bash
+```
 systemctl status docker
 ```
 
 Test it with a Hello-World container
 
-```bash
+```
 docker run hello-world
 ```
 
@@ -71,20 +71,20 @@ Supernote recommends at least 50GB of disk space available for the software + da
 
 Create an installation directory, this will hold our configuration files and notes data once the virtual cloud software is installed.
 
-```bash
+```
 mkdir -pv /data/supernote 
 cd /data/supernote
 ```
 
 Next, download the db initialization file. Note that this url is incorrectly formatted in the original documenation. 
 
-```bash
+```
 curl -O https://supernote-private-cloud.supernote.com/cloud/supernotedb.sql
 ```
 
 Create the folders where the data will persist even if you destroy the Docker containers.
 
-```bash
+```
 mkdir -pv {sndata/cert,supernote_data}
 ```
 
@@ -101,7 +101,7 @@ Reference:
 
 Assuming you are still under ```/data/supernote```
 
-```bash
+```
 nano .env
 ```
 
@@ -130,13 +130,13 @@ The Supernote documentation has an additional HTTPS/SSL section defining a domai
 
 Still in the ```/data/supernote``` directory, download the docker compose file from this repo.
 
-```bash
+```
 curl -o https://raw.githubusercontent.com/camerahacks/super-supernote/refs/heads/main/private-cloud/docker-compose.yml
 ```
 
 Udate the ```notelib``` and ```supernote-service``` image versions, if needed. Supernote doesn't provide a ```latest``` tag, so you have to change the version in the compose file.
 
-```bash
+```
 nano docker-compose.yml
 ```
 Update the versions (in this case ```6.9.3``` and ```25.11.24```) to the newest versions available on Docker Hub.
@@ -158,19 +158,20 @@ Update the versions (in this case ```6.9.3``` and ```25.11.24```) to the newest 
 
 Everything is configured and we are ready to start the containers to deploy.
 
-```bash
+```
 docker-compose up -d
 ```
 
 > [!WARNING]
 > You might be tempted to connect your Supernote device to your shiny new private cloud instance at this pont. DON'T!
-> Currently (Chauvet ) requires a *factory reset* to switch private cloud providers.
+> Currently, Chauvet versions 3.25.39 (Manta/Nomad) and 2.23.36 (A5X and A6X) require a *factory reset* to switch private cloud providers.
 > Make sure your Supernote Private Cloud is working appropriately before connecting a Supernote device. It's better to test with a Supernote Partner app first.
 
 ### Install Nginx Proxy Manager
 This step is not required but it will make your life so much easier. It will allow you to setup a secure connection between the Supernote device and . Also, you can use NPM for any other self-hosted service you might already have.
 
 Create an installation directory
+
 ```
 mkdir proxymanager
 cd proxymanager
