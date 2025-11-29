@@ -131,10 +131,10 @@ The Supernote documentation has an additional HTTPS/SSL section defining a domai
 Still in the ```/data/supernote``` directory, download the docker compose file from this repo.
 
 ```bash
-curl -o 
+curl -o https://raw.githubusercontent.com/camerahacks/super-supernote/refs/heads/main/private-cloud/docker-compose.yml
 ```
 
-The only thing you have to update are the ```notelib``` and ```supernote-service``` image versions.
+Udate the ```notelib``` and ```supernote-service``` image versions, if needed. Supernote doesn't provide a ```latest``` tag, so you have to change the version in the compose file.
 
 ```bash
 nano docker-compose.yml
@@ -147,12 +147,25 @@ Update the versions (in this case ```6.9.3``` and ```25.11.24```) to the newest 
 
 ```yml
   notelib:
-    image: docker.io/supernote/notelib:6.9.3
+    image: docker.io/supernote/notelib:6.9.3 <--- version to update if needed
     container_name: notelib
 
   supernote-service:
-    image: docker.io/supernote/supernote-service:25.11.24
+    image: docker.io/supernote/supernote-service:25.11.24 <--- version to update if needed
 ```
+
+### Start the containers
+
+Everything is configured and we are ready to start the containers to deploy.
+
+```bash
+docker-compose up -d
+```
+
+> [!WARNING]
+> You might be tempted to connect your Supernote device to your shiny new private cloud instance at this pont. DON'T!
+> Currently (Chauvet ) requires a *factory reset* to switch private cloud providers.
+> Make sure your Supernote Private Cloud is working appropriately before connecting a Supernote device. It's better to test with a Supernote Partner app first.
 
 ### Install Nginx Proxy Manager
 This step is not required but it will make your life so much easier. It will allow you to setup a secure connection between the Supernote device and . Also, you can use NPM for any other self-hosted service you might already have.
