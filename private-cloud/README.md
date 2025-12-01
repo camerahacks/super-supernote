@@ -187,12 +187,17 @@ Just because you will be using a domain name, it doesn't mean your private cloud
 
 A major benefit of having a domain name is that you can obtain a (free) SSL certificate to use with your Supernote Private Cloud. Yes, I am aware self-signed certificates exist, but most browsers will still give you a warning that your connection is not secure when using self-signed certificates. There is a reason for that.
 
+My preferred domain name registrar is [CloudFlare](https://domains.cloudflare.com/).
+
 ### Install Nginx Proxy Manager
 
 > [!NOTE]
-> Proxy Manager should be installed using the default ports 80 and 443. If you have a local DNS like pi.hole running on port 80/443, make sure to change it to a different port before installing Proxy Manager. 
+> Proxy Manager should be installed using the default ports 80 and 443. If you have a local DNS like pi.hole running on port 80/443, make sure to change it to a different port before installing Proxy Manager.
+> Pi.hole is perfectly happy running on ports 8080/8443.
 
-This step is not required but it will make your life so much easier. It will allow you to setup a secure connection between the Supernote device and the reverse proxy. Also, you can use Nginx Proxy Manager (NPM) for any other self-hosted service you might already have.
+Installing Proxy Manager is not required but it will make your life so much easier. It will allow you to setup a secure connection between the Supernote device and the reverse proxy. Also, you can use Nginx Proxy Manager (NPM) for any other self-hosted service you might already have.
+
+Nginx Proxy Manager is just a graphical configuration tool for Nginx. Nginx is an enterprise grade web server.
 
 Create an installation directory
 
@@ -203,7 +208,15 @@ cd /data/proxymanager
 
 Follow the instructions on the official [Nginx Proxy Manager website](https://nginxproxymanager.com/setup/).
 
-Here is a [list of world timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to add to your Proxy Manager docker compose file.
+Here is a [list of world timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to add to your Proxy Manager Docker compose file.
+
+Once Nginx and Proxy Manager are up and running, navigate to ipaddress:81 to access Proxy Manager's dashboard page.
+
+From there, add a Proxy Host.
+
+Choose a subdomain for your cloud network. In my case, I chose ```sn.example.com```.
+
+
 
 ## Backup Strategy
 
