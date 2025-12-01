@@ -8,6 +8,8 @@ services:
     container_name: supernote-mariadb
     networks:
       - supernote-net
+    ports:
+      - "3306:3306"
     env_file:
       - .env
     command: --skip-name-resolve --bind-address=0.0.0.0

@@ -13,19 +13,21 @@ The official documentation can be a little bit of a hit and a miss. This guide a
 
 ## Background
 
-This guide is intented for folks getting into self hosting. I would love to have Supernote Private Cloud running on a Raspberry Pi, but Supernote has not released support for Arm computers yet. Supernote Private Cloud is not compatible with Windows.
+This guide is intended for users getting into self hosting. I would love to have Supernote Private Cloud running on a Raspberry Pi, but Supernote has not released support for Arm architecture yet. Supernote Private Cloud is not compatible with Windows.
 
 ## Install Steps (Full Guide)
 
 ### Install docker
 
-I recommend taking a look at the installation guide below and following all the steps if you don't have Docker installed alread.
+Supernote Private Cloud runs on Docker containers. So, the first step is to get Docker installed.
+
+I recommend taking a look at the installation guide below and following all the steps if you don't have Docker installed already.
 
 [Docker Install Guide](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
 
-Here are the steps for a fresh install.
+Here are the steps for a fresh install if you don't want to read the guide.
 
-Docker requires ```root``` priviledges for pretty much all its commands. So, this is a good time to login as root. If you are logged in as another user use ```sudo su``` to become root.
+Docker requires ```root``` privileges for pretty much all its commands. So, this is a good time to login as root. If you are logged in as another user use ```sudo su``` to become root.
 
 ```
 # Add Docker's official GPG key:
@@ -65,9 +67,10 @@ Test it with a Hello-World container
 docker run hello-world
 ```
 
-### create directories
+### Create Directories
 
-Supernote recommends at least 50GB of disk space available for the software + data.
+> [!NOTE]
+> Supernote recommends at least 50GB of disk space available for the application + data.
 
 Create an installation directory, this will hold our configuration files and notes data once the virtual cloud software is installed.
 
@@ -76,7 +79,7 @@ mkdir -pv /data/supernote
 cd /data/supernote
 ```
 
-Next, download the db initialization file. Note that this url is incorrectly formatted in the original documenation. 
+Next, download the database initialization file. Note that this url is incorrectly formatted in the original documentation. 
 
 ```
 curl -O https://supernote-private-cloud.supernote.com/cloud/supernotedb.sql
@@ -92,7 +95,8 @@ mkdir -pv {sndata/cert,supernote_data}
 
 The Docker Compose file uses a series of variables from this environment file. Keep in mind this will save your passwords in plain text and there is risk involved with this. Since this guide is geared towards the self hosting crowd, this might be an acceptable approach to you.
 
-Reference:
+References:
+
 [MariaDB Docker Hub](https://hub.docker.com/_/mariadb)
 
 [MariaDB Docker Variables](https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/mariadb-server-docker-official-image-environment-variables)
@@ -108,14 +112,14 @@ nano .env
 Copy and past the content below. Make sure to change the values between ```<>```. For example, ```<mysqlrootpassword>``` becomes ```strongpassword```
 
 ```
-# Dtabases settings
+# Databases settings
 DB_HOSTNAME="supernote-mariadb"
 MYSQL_ROOT_PASSWORD="<mysqlrootpassword>"
 MYSQL_DATABASE="supernotedb"
 MYSQL_USER="<supernote>"
 MYSQL_PASSWORD="<supernotedbpassword>"
 
-# Redis setings
+# Redis settings
 REDIS_HOST="supernote-redis"
 REDIS_PASSWORD="<supernoteredispassword>"
 REDIS_PORT="6379"
@@ -126,15 +130,21 @@ The Supernote documentation has an additional HTTPS/SSL section defining a domai
 
 ### Docker Compose file
 
-[List of Timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
 Still in the ```/data/supernote``` directory, download the docker compose file from this repo.
 
 ```
 curl -o https://raw.githubusercontent.com/camerahacks/super-supernote/refs/heads/main/private-cloud/docker-compose.yml
 ```
 
-Udate the ```notelib``` and ```supernote-service``` image versions, if needed. Supernote doesn't provide a ```latest``` tag, so you have to change the version in the compose file.
+> [!NOTE]
+> I chose to expose the mariaDB port ```3306``` outside of the Docker container. This allows for easy database backup and management using a script or a database management too like [MySQL Workbench](https://www.mysql.com/products/workbench/). Exposing port ```3306``` is not strictly needed and you can delete the lines below from ```docker-compose.yml``` if you don't want this port to be exposed.
+
+```yml
+ports:
+      - "3306:3306"
+```
+
+Update the ```notelib``` and ```supernote-service``` image versions, if needed. Supernote doesn't provide a ```latest``` tag, so you have to change the version in the compose file.
 
 ```
 nano docker-compose.yml
@@ -146,12 +156,12 @@ Update the versions (in this case ```6.9.3``` and ```25.11.24```) to the newest 
 [supernote/supernote-service on Docker Hub](https://hub.docker.com/r/supernote/supernote-service)
 
 ```yml
-  notelib:
-    image: docker.io/supernote/notelib:6.9.3 <--- version to update if needed
-    container_name: notelib
+notelib:
+  image: docker.io/supernote/notelib:6.9.3 <--- version to update if needed
+  container_name: notelib
 
-  supernote-service:
-    image: docker.io/supernote/supernote-service:25.11.24 <--- version to update if needed
+supernote-service:
+  image: docker.io/supernote/supernote-service:25.11.24 <--- version to update if needed
 ```
 
 ### Start the containers
@@ -167,19 +177,47 @@ docker-compose up -d
 > Currently, Chauvet versions 3.25.39 (Manta/Nomad) and 2.23.36 (A5X and A6X) require a *factory reset* to switch private cloud providers.
 > Make sure your Supernote Private Cloud is working appropriately before connecting a Supernote device. It's better to test with a Supernote Partner app first.
 
+At this point, the Supernote Private Cloud should be accessible through HTTP only (no encryption). You can navigate to ```cloudIP:19072``` and start using your private server. But, if you are planning on opening this application to the broader internet, you should be using HTTPS for a secure connection.
+
+### Get a Domain Name
+
+Using the IP address through HTTP is a completely acceptable solution, but it will give you so many headaches down the line.
+
+Just because you will be using a domain name, it doesn't mean your private cloud needs to be accessible to the internet. Registering a domain name just means you can use it however you want. Even if for the sole purpose of not having to remember which service is hosted at which IP address.
+
+A major benefit of having a domain name is that you can obtain a (free) SSL certificate to use with your Supernote Private Cloud. Yes, I am aware self-signed certificates exist, but most browsers will still give you a warning that your connection is not secure when using self-signed certificates. There is a reason for that.
+
 ### Install Nginx Proxy Manager
-This step is not required but it will make your life so much easier. It will allow you to setup a secure connection between the Supernote device and . Also, you can use NPM for any other self-hosted service you might already have.
+
+> [!NOTE]
+> Proxy Manager should be installed using the default ports 80 and 443. If you have a local DNS like pi.hole running on port 80/443, make sure to change it to a different port before installing Proxy Manager. 
+
+This step is not required but it will make your life so much easier. It will allow you to setup a secure connection between the Supernote device and the reverse proxy. Also, you can use Nginx Proxy Manager (NPM) for any other self-hosted service you might already have.
 
 Create an installation directory
 
 ```
-mkdir proxymanager
-cd proxymanager
+mkdir -pv /data/proxymanager
+cd /data/proxymanager
 ```
 
-## Ports
+Follow the instructions on the official [Nginx Proxy Manager website](https://nginxproxymanager.com/setup/).
 
+Here is a [list of world timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to add to your Proxy Manager docker compose file.
 
-## Folder Structure
+## Backup Strategy
+
+Although Private Cloud sync offers some data redundancy, it is not considered a backup strategy. You should backup the data stored in ```/data/supernote/supernote_data``` in a safe location. 
+
+I find the easiest way to backup the files from the private cloud is to mount a NAS share and use ```rsync``` with the ```-a``` flag to archive all the files. The ```-a``` flag is important because it doesn't delete any files from the destination folder if it is not present in the source folder. So, if I accidentally delete a file and only notice it after performing sync, the file is preserved in a separate backup location.
+
+In the example below, a NAS shared folder is mounted to ```/mnt/supernote-files/``` on the machine running the private cloud software. You can setup a cron job to run this command on a regular basis.
+
+```sh
+rsync -a /data/supernote/supernote_data/ /mnt/supernote-files/
+```
+
+In addition to backing up the document and note files, you could backup the MariaDB database. This would theoretically allow you to reinstate the database in case it gets corrupted. I have not tested reinstating the database from a backup file yet, so take this recommendation with a grain of salt.
+
 
 ## Nginx Reverse Proxy (Proxy Manager)
