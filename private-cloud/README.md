@@ -210,13 +210,51 @@ Follow the instructions on the official [Nginx Proxy Manager website](https://ng
 
 Here is a [list of world timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to add to your Proxy Manager Docker compose file.
 
+### Configure Proxy Manager
+
 Once Nginx and Proxy Manager are up and running, navigate to ipaddress:81 to access Proxy Manager's dashboard page.
 
 From there, add a Proxy Host.
 
-Choose a subdomain for your cloud network. In my case, I chose ```sn.example.com```.
+On the Details tab, choose a subdomain for your cloud network. In my case, I chose ```sn.example.com```.
 
+Leave the scheme as ```http```.
 
+Forward Hostname/IP should be the ip address for the machine that is running Supernote Private Cloud.
+
+Forward Port should be ```19072```.
+
+Move to the Custom locations tab.
+
+Enter ```/``` as the location and enter the same information for Scheme, IP, and Forward Port.
+
+Click on the gear icon next to location and enter the settings below.
+
+```
+proxy_set_header X-Forwarded-Host $host;
+proxy_set_header X-Forwarded-Port $server_port;
+```
+
+Now, go to the Advanced tab and enter the same settings again. I honestly don't think this does anything but it can't hurt.
+
+```
+proxy_set_header X-Forwarded-Host $host;
+proxy_set_header X-Forwarded-Port $server_port;
+```
+
+### Configure SSL/HTTPS
+
+Nginx Proxy Manager can request and maintain an SSL certificate for our domain.
+
+In Proxy Manager, click on SSL Certificates and add a new Let's Encrypt Certificate.
+
+Next, enter the same domain/sub-domain used to configure the Proxy Host. ```sn.example.com``` is the domain name we have been using in this guide.
+
+If the Supernote Private Cloud is not exposed to the internet, you will have to use a DNS Challenge to verify that you control the domain name. Choose your DNS provider and follow the instructions.
+
+## Ready to Roll
+
+At this point, you should have Supernote Private Cloud accessible through a secure connection to your server. You can follow the steps on the official guide on how to configure an email account and register new users.
 
 ## Backup Strategy
 
@@ -231,6 +269,3 @@ rsync -a /data/supernote/supernote_data/ /mnt/supernote-files/
 ```
 
 In addition to backing up the document and note files, you could backup the MariaDB database. This would theoretically allow you to reinstate the database in case it gets corrupted. I have not tested reinstating the database from a backup file yet, so take this recommendation with a grain of salt.
-
-
-## Nginx Reverse Proxy (Proxy Manager)
