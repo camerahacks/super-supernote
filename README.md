@@ -1,6 +1,8 @@
 # Super-Supernote
 This is a collection of tools, scripts, and guides to make Supernote devices even more super.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J6BINRX)
+
 ## Tools
 
 [supernote-tool](https://github.com/jya-dev/supernote-tool) (Python)

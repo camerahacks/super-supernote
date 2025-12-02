@@ -10,6 +10,9 @@ The official documentation can be a little bit of a hit and a miss. This guide a
 
 [Docker Manual](https://ib.supernote.com/private-cloud/Supernote-Private-Cloud-Manual-Deployment-Method-Using-Docker-Containers.pdf)
 
+If you find this guide helpful, consider buying me a coffee.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J6BINRX)
 
 ## Background
 
