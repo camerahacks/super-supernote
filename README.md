@@ -26,3 +26,15 @@ Heavily inspired on supernote-tool and provides similar functionality
 A device-agnostic command-line tool for generating mathematically balanced, pixel-perfect page templates for e-ink devices. Developed with the Supernote Manta, this tool supports millimeter or pixel specifications for human-readable, technically-precise, or true-scale template configurations.
 
 Use this tool to create templates for any eInk device.
+
+## Private Cloud
+
+Ratta offers free cloud service to sync notes between Supernote devices and partner apps. They also offer a Private Cloud Docker image so you can self-host a cloud sync service for Supernote devices.
+
+Here is a guide I put together on how to get it up and running.
+
+> [!NOTE]
+> This guide assumes you are already running a Linux server and that you have some technical knowledge (or the patience) to troubleshoot a web application.
+> Everyone's setup is different and this guide might not work for everyone.
+
+[Supernote Private Cloud Helper Guide](private-cloud/README.md)
