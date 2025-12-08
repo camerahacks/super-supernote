@@ -91,7 +91,7 @@ curl -O https://supernote-private-cloud.supernote.com/cloud/supernotedb.sql
 Create the folders where the data will persist even if you destroy the Docker containers.
 
 ```
-mkdir -pv {sndata/cert,supernote_data}
+mkdir -pv {sndata/cert,supernote_data,mariadb_backup}
 ```
 
 ### Create environment variables file
@@ -272,3 +272,22 @@ rsync -a /data/supernote/supernote_data/ /mnt/supernote-files/
 ```
 
 In addition to backing up the document and note files, you could backup the MariaDB database. This would theoretically allow you to reinstate the database in case it gets corrupted. I have not tested reinstating the database from a backup file yet, so take this recommendation with a grain of salt.
+
+For instance, this command will be ran inside the Docker container and the results will be saved to the host.
+
+```
+docker exec -it supernote-mariadb bash -c 'mysqldump -u root -p$MYSQL_ROOT_PASSWORD supernotedb' | dd of=/data/supernote/mariadb_backup/$(date +%Y-%m-%d_%H-%M-%S)_db_backup.sql
+```
+
+Since things are gettinr a little bit mor complex, it's better to save this as a bash script. This is the contents from ```cloud-backup.sh```.
+
+```
+#!/bin/bash
+
+# Backup MariaDB databases
+docker exec -it supernote-mariadb bash -c 'mysqldump -u root -p$MYSQL_ROOT_PASSWORD supernotedb' | dd of=/data/supernote/mariadb_backup/$(date +%Y-%m-%d_%H-%M-%S)_db_backup.sql
+
+# Backup note files from Supernote device to mounted storage
+rsync -a /data/supernote/supernote_data/ /mnt/supernote-files/
+rsync -a /data/supernote/mariadb_backup/ /mnt/supernote-files/mariadb_backup/
+```
