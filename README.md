@@ -6,6 +6,7 @@ This is a collection of tools, scripts, and guides to make Supernote devices eve
 ## Tips and Tricks
 
 [How to Create a Home Page](tips-and-tricks/how-to-create-a-home-page.md)
+
 Supernote devices are notorious for not having a "home button" but that doesn't meant you can't create your own home page.
 
 ## Tools
