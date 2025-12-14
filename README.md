@@ -9,6 +9,12 @@ This is a collection of tools, scripts, and guides to make Supernote devices eve
 
 Supernote devices are notorious for not having a "home button" but that doesn't meant you can't create your own home page.
 
+## Good to Know
+
+**Wi-Fi** on Supernote devices does not support WPA3. If you can't connect to a WiFi access point, check if it is using WPA3. This is a serious security concern and Ratta should address this.
+
+**PDF Templates** cannot be assigned to a note when creating the note file. However, you can create the note file and then change the template it is using to a PDF template.
+
 ## Tools
 
 [supernote-tool](https://github.com/jya-dev/supernote-tool) (Python)
