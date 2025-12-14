@@ -3,6 +3,11 @@ This is a collection of tools, scripts, and guides to make Supernote devices eve
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J6BINRX)
 
+## Tips and Tricks
+
+[How to Create a Home Page](tips-and-tricks/how-to-create-a-home-page.md)
+Supernote devices are notorious for not having a "home button" but that doesn't meant you can't create your own home page.
+
 ## Tools
 
 [supernote-tool](https://github.com/jya-dev/supernote-tool) (Python)
@@ -17,7 +22,7 @@ PySN builds on supernote-tool and provides additional functionality like OCR and
 
 Heavily inspired on supernote-tool and provides similar functionality
 
-### Templates
+## Templates
 
 [Supernote official documentation](https://support.supernote.com/en_US/faq/how-to-create-a-custom-note-template) on how to create a note template.
 
