@@ -3,6 +3,14 @@ This is a collection of tools, scripts, and guides to make Supernote devices eve
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J6BINRX)
 
+## Table of Contents
+
+* [Tips and Tricks](#tips-and-tricks)
+* [Good to Know](#good-to-know)
+* [Tools](#tools)
+* [Templates](#templates)
+* [Supernote Private Cloud](#private-cloud)
+
 ## Tips and Tricks
 
 [How to Create a Home Page](tips-and-tricks/how-to-create-a-home-page.md)
@@ -39,7 +47,7 @@ A device-agnostic command-line tool for generating mathematically balanced, pixe
 
 Use this tool to create templates for any eInk device.
 
-## Private Cloud
+## Supernote Private Cloud
 
 Ratta offers free cloud service to sync notes between Supernote devices and partner apps. They also offer a Private Cloud Docker image so you can self-host a cloud sync service for Supernote devices.
 
