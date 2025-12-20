@@ -9,7 +9,8 @@ This is a collection of tools, scripts, and guides to make Supernote devices eve
 * [Good to Know](#good-to-know)
 * [Tools](#tools)
 * [Templates](#templates)
-* [Supernote Private Cloud](#private-cloud)
+* [Sideloading Apps](#sideloading-apps)
+* [Supernote Private Cloud](#supernote-private-cloud)
 
 ## Tips and Tricks
 
@@ -46,6 +47,20 @@ Heavily inspired on supernote-tool and provides similar functionality
 A device-agnostic command-line tool for generating mathematically balanced, pixel-perfect page templates for e-ink devices. Developed with the Supernote Manta, this tool supports millimeter or pixel specifications for human-readable, technically-precise, or true-scale template configurations.
 
 Use this tool to create templates for any eInk device.
+
+## Sideloading Apps
+
+Follow the [How to Sideload Apps](/tips-and-tricks/how-to-sideload-apps.md) guide to make your Supernote device even more super.
+
+### Tested Apps
+
+This is a list of apps I have used on my Supernote device and provide good functionality.
+Please do your due diligence before downloading and sideloading apps to your device. You can introduce malicious software to your device if you are not careful.
+
+This list will grow as I test more apps.
+
+* [EinkBro](https://github.com/plateaukao/einkbro) - Lightweight, but full featured, web browser designed to work well with eInk devices.
+* [F-Droid](https://f-droid.org/en/) - Android App store for Free and Open Source Software (FOSS)
 
 ## Supernote Private Cloud
 
