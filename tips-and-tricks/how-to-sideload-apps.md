@@ -33,6 +33,11 @@ Navigate to [SDK Platform Tools](https://developer.android.com/tools/releases/pl
 
 After unzipping, you should have a folder called ```platform-tools```. This is where the ```adb``` executable live.
 
+On Ubuntu/Debian, you can install ADB using a system package. Other distros might also have a system package available.
+```
+sudo apt install android-sdk-platform-tools
+```
+
 ## Enable Sideloading on Supernote Device
 
 Go to ```Settings > Security & Privacy``` and make sure ```Sideloading``` is toggled.
@@ -47,7 +52,7 @@ The easiest way to do this on a Windows computer is to navigate to the ```platfo
 
 This will open a terminal session under the correct folder containing the ```adb.exe``` program.
 
-If you are on Linux, I'm sure you know how to open a terminal window and navigate to the correct folder. So, I won't patronize you :smile:
+If you are on Linux, I'm sure you know how to open a terminal window and navigate to the correct folder. So, I won't patronize you :smile:.
 Just remember to ```chmod +x adb``` if it is not executable after unzipping.
 
 If you are on a Mac, I am sorry :grin:
