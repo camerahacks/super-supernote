@@ -9,6 +9,7 @@ This is a collection of tools, scripts, and guides to make Supernote devices eve
 * [Good to Know](#good-to-know)
 * [Tools](#tools)
 * [Templates](#templates)
+* [Planners](#planners)
 * [Sideloading Apps](#sideloading-apps)
 * [Supernote Private Cloud](#supernote-private-cloud)
 
@@ -38,6 +39,10 @@ PySN builds on supernote-tool and provides additional functionality like OCR and
 
 Heavily inspired on supernote-tool and provides similar functionality
 
+[snpvclient](https://github.com/camerahacks/sn-private-client)
+
+Supernote Private Cloud Python Client. Main use is to automatically upload files to your private cloud instance.
+
 ## Templates
 
 [Supernote official documentation](https://support.supernote.com/en_US/faq/how-to-create-a-custom-note-template) on how to create a note template.
@@ -47,6 +52,12 @@ Heavily inspired on supernote-tool and provides similar functionality
 A device-agnostic command-line tool for generating mathematically balanced, pixel-perfect page templates for e-ink devices. Developed with the Supernote Manta, this tool supports millimeter or pixel specifications for human-readable, technically-precise, or true-scale template configurations.
 
 Use this tool to create templates for any eInk device.
+
+## Planners
+
+[Remarkbly Organized](https://remarkably-organized.pages.dev/)
+
+Free tool that lets you customize and download .PDF calendar planners.
 
 ## Sideloading Apps
 
@@ -73,3 +84,7 @@ Here is a guide I put together on how to get it up and running.
 > Everyone's setup is different and this guide might not work for everyone.
 
 [Supernote Private Cloud Helper Guide](private-cloud/README.md)
+
+You can use the Supernote Private Cloud Python Client library to connect, upload and manage files using your private cloud instance.
+
+[Supernote Private Cloud Python Client](https://github.com/camerahacks/sn-private-client)
