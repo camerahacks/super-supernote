@@ -279,7 +279,7 @@ For instance, this command will be ran inside the Docker container and the resul
 docker exec -it supernote-mariadb bash -c 'mysqldump -u root -p$MYSQL_ROOT_PASSWORD supernotedb' | dd of=/data/supernote/mariadb_backup/$(date +%Y-%m-%d_%H-%M-%S)_db_backup.sql
 ```
 
-Since things are gettinr a little bit mor complex, it's better to save this as a bash script. This is the contents from ```cloud-backup.sh```.
+Since things are getting a little bit more complex, it's better to save this as a bash script. This is the contents from ```cloud-backup.sh```.
 
 ```
 #!/bin/bash
