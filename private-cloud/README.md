@@ -172,7 +172,7 @@ supernote-service:
 Everything is configured and we are ready to start the containers to deploy.
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 > [!WARNING]
