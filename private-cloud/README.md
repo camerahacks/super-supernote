@@ -227,6 +227,8 @@ Forward Hostname/IP should be the ip address for the machine that is running Sup
 
 Forward Port should be ```19072```.
 
+Make sure to enable Websockets Support.
+
 Move to the Custom locations tab.
 
 Enter ```/``` as the location and enter the same information for Scheme, IP, and Forward Port.

@@ -39,7 +39,7 @@ PySN builds on supernote-tool and provides additional functionality like OCR and
 
 Heavily inspired on supernote-tool and provides similar functionality
 
-[snpvclient](https://github.com/camerahacks/sn-private-client)
+[snpvclient](https://github.com/camerahacks/sn-private-client) (Python)
 
 Supernote Private Cloud Python Client. Main use is to automatically upload files to your private cloud instance.
 
